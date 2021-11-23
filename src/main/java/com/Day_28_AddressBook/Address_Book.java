@@ -258,8 +258,58 @@ public class Address_Book
 		showAllContacts();
 	}
 
+	public void writeFile(String file) throws IOException
+	{
+		try 
+		{
+			FileWriter writer = new FileWriter(file, true);
+			for (Contacts c : list) 
+			{
+				writer.write("First Name:: "+c.getFirstName());
+				writer.write("\n");
+				writer.write("Last Name:: "+c.getLastName());
+				writer.write("\n");
+				writer.write("Email:: "+c.getEmailId());
+				writer.write("\n");
+				writer.write("Address:: "+c.getAddress());
+				writer.write("\n");
+				writer.write("City :: "+c.getCity());
+				writer.write("\n");
+				writer.write("State :: "+c.getState());
+				writer.write("\n");
+				writer.write("Zip Code:: "+c.getZip());
+				writer.write("\n");
+				writer.write("Phone Number:: "+c.getPhoneNo());
+				writer.write("\n");
+				writer.close();
+			}	
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public void readFile(String file)
+	{
+		try {
+            FileReader reader = new FileReader(file);
+            int character;
+ 
+            while ((character = reader.read()) != -1) 
+            {
+                System.out.print((char) character);
+            }
+            reader.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
-	public void writeFile(String file) throws IOException, ParseException 
+	public void writeJSONFile(String file) throws IOException, ParseException 
 	{
 		JSONArray arr = new JSONArray();
 		FileWriter writer = new FileWriter(file);
@@ -287,7 +337,7 @@ public class Address_Book
 		}
 	}
 	
-	public void readFile(String file) throws Exception
+	public void readJSONFile(String file) throws Exception
 	{
 		JSONParser jsonP = new JSONParser();
 		FileReader reader = new FileReader(file);
@@ -418,6 +468,7 @@ public class Address_Book
 		System.out.println("8. Sort ");
 		System.out.println("9. Write and Read into a JSON File");
 		System.out.println("10. Write and Read into a CSV File");
+		System.out.println("11. Write and Read into a TEXT File");
 		System.out.println("Enter Your Choice");
 		int choice = sc.nextInt();
 		while(choice!=0)
@@ -522,18 +573,18 @@ public class Address_Book
 				case 9:
                     if (chooseAddressBook == 1) 
                     {
-                    	book1.writeFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook1.json");
-                    	book1.readFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook1.json");
+                    	book1.writeJSONFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook1.json");
+                    	book1.readJSONFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook1.json");
                     }
                     else if (chooseAddressBook == 2) 
                     {
-                    	book2.writeFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook2.json");
-                    	book2.readFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook2.json");
+                    	book2.writeJSONFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook2.json");
+                    	book2.readJSONFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook2.json");
                     }
                     else if (chooseAddressBook == 3) 
                     {
-                    	book3.writeFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.json");
-                    	book3.readFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.json");
+                    	book3.writeJSONFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.json");
+                    	book3.readJSONFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.json");
                     }
                     else 
                     	System.out.println("Wrong Input");
@@ -554,6 +605,26 @@ public class Address_Book
                     {
                     	book3.writeCSVFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.csv");
                     	book3.readCSVFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.csv");
+                    }
+                    else 
+                    	System.out.println("Wrong Input");
+                    break;
+                    
+				case 11:
+                    if (chooseAddressBook == 1) 
+                    {
+                    	book1.writeFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook1.txt");
+                    	book1.readFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook1.txt");
+                    }
+                    else if (chooseAddressBook == 2) 
+                    {
+                    	book2.writeFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook2.txt");
+                    	book2.readFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook2.txt");
+                    }
+                    else if (chooseAddressBook == 3) 
+                    {
+                    	book3.writeFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.txt");
+                    	book3.readFile("C:\\Users\\Arafath Baig\\eclipse-workspace\\Day_28_AddressBook\\src\\main\\resources\\AddressBook3.txt");
                     }
                     else 
                     	System.out.println("Wrong Input");
@@ -582,6 +653,7 @@ public class Address_Book
 			System.out.println("8. Sort ");
 			System.out.println("9. Write and Read into a JSON File");
 			System.out.println("10. Write and Read into a CSV File");
+			System.out.println("11. Write and Read into a TEXT File");
 			System.out.println("Enter Your Choice");
 			choice = sc.nextInt();
 		}
